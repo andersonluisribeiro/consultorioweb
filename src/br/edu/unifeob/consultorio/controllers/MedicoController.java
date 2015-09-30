@@ -6,22 +6,25 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.Controller;
+import br.com.caelum.vraptor.Get;
+import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
+import br.edu.unifeob.consultorio.daos.MedicoDAO;
 import br.edu.unifeob.consultorio.entities.Medico;
 
 @Controller
 public class MedicoController {
 
 	private Result result;
-	private EntityManager entityManager;
+	private MedicoDAO medicoDAO;
 	
 	public MedicoController() {		
 	}
 
 	@Inject
-	public MedicoController(Result result, EntityManager entityManager) {
+	public MedicoController(Result result, MedicoDAO medicoDAO) {
 		this.result = result;
-		this.entityManager = entityManager;
+		this.medicoDAO = medicoDAO;
 	}
 	
 	public void form(){
@@ -29,19 +32,12 @@ public class MedicoController {
 	}
 	
 	public void salvar(Medico medico){
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.persist(medico);
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-		}
+		medicoDAO.salvar(medico);
 		result.redirectTo(this.getClass()).listar();
-		
 	}
 	
 	public void listar(){
-		List<Medico> medicos = entityManager.createQuery("from Medico").getResultList();
+		List<Medico> medicos = medicoDAO.listar();
 		result.include("medicos", medicos);
 	}
 	
