@@ -21,7 +21,7 @@ public class MedicoDAO {
 		this.entityManager = entityManager;
 	}
 
-	public void salvar(Medico medico) {
+	public void salvar(Medico medico) {	
 		entityManager.persist(medico);
 	}
 

@@ -3,11 +3,8 @@ package br.edu.unifeob.consultorio.controllers;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 import br.com.caelum.vraptor.Controller;
-import br.com.caelum.vraptor.Get;
-import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.edu.unifeob.consultorio.daos.MedicoDAO;
 import br.edu.unifeob.consultorio.entities.Medico;
@@ -28,7 +25,6 @@ public class MedicoController {
 	}
 	
 	public void form(){
-		
 	}
 	
 	public void salvar(Medico medico){
