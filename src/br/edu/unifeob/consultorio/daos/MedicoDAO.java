@@ -12,31 +12,21 @@ import br.edu.unifeob.consultorio.entities.Medico;
 public class MedicoDAO {
 
 	private EntityManager entityManager;
-	
+
 	public MedicoDAO() {
 	}
-	
+
 	@Inject
 	public MedicoDAO(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-	
-	public void salvar(Medico medico){
-		try {
-			entityManager.getTransaction().begin();
-			entityManager.persist(medico);
-			entityManager.getTransaction().commit();
-		} catch (Exception e) {
-			entityManager.getTransaction().rollback();
-		}
-	}
-	
-	public List<Medico> listar(){ 
-		return entityManager.createQuery("from Medico").getResultList();
-		
-	}
-	
-	
-	
-}
 
+	public void salvar(Medico medico) {
+		entityManager.persist(medico);
+	}
+
+	public List<Medico> listar() {
+		return entityManager.createQuery("from Medico", Medico.class).getResultList();
+	}
+
+}
